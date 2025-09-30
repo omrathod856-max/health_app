@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import os
 import datetime
 
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = "gu42r4r437rt54fr854"
 
 
 app = Flask(__name__)
@@ -145,3 +145,4 @@ def profile():
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port=5000,debug=True)
+
