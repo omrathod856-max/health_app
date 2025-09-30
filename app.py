@@ -4,11 +4,11 @@ from pymongo import MongoClient
 import os
 import datetime
 
-SECRET_KEY = "gu42r4r437rt54fr854"
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 
 app = Flask(__name__)
-app.secret_key = SECRET_KEY  # Needed for session
+app.secret_key = SECRET_KEY   # Needed for session
 
 # MongoDB connection
 client = MongoClient("mongodb+srv://omrathod856_db_user:pcsUeuFye0EQRGFu@cluster0.8sevinr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",tls=True, tlsAllowInvalidCertificates=True)
@@ -145,4 +145,5 @@ def profile():
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port=5000,debug=True)
+
 
