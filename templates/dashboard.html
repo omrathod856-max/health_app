@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Health Advisor</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard-shell">
+    <div class="topbar">
+      <div class="welcome">👋 Welcome, {{ session['username'] }}
+      <a href="{{ url_for('profile') }}" class="btn btn-secondary">Update Profile</a>
+      </div>
+      <a href="{{ url_for('logout') }}" class="btn btn-ghost logout">Logout</a>
+    </div>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="flash flash-{{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="grid">
+      <div class="widget">
+        <h3>Health Summary</h3>
+        {% if profile and profile.last_bmi %}
+          <p>Your latest BMI: <strong>{{ profile.last_bmi.value }}</strong></p>
+          <p>Category: <strong>{{ profile.last_bmi.category }}</strong></p>
+          <p>Recorded on: <strong>{{ profile.last_bmi.date.strftime('%B %d, %Y') }}</strong></p>
+        {% else %}
+          <p>Your latest health insights will appear here.</p>
+        {% endif %}
+      </div>
+      <div class="widget">
+        <h3>Diet Recommendations</h3>
+        <p>Personalized meal plans coming soon.</p>
+      </div>
+      <div class="widget">
+        <h3>Activity Tracker</h3>
+        <p>Log your daily steps and workouts.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

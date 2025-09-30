@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-card">
+  <h2>Your Profile</h2>
+  <form method="POST" class="form">
+    <label class="label">Age</label>
+    <input type="number" name="age" class="input" value="{{ user.profile.age if user.profile }}" required>
+
+    <label class="label">Height (cm)</label>
+    <input type="number" step="0.1" name="height" class="input" value="{{ user.profile.height if user.profile }}" required>
+
+    <label class="label">Weight (kg)</label>
+    <input type="number" step="0.1" name="weight" class="input" value="{{ user.profile.weight if user.profile }}" required>
+
+    <label class="label">Gender</label>
+    <select name="gender" class="input">
+      <option value="male" {% if user.profile and user.profile.gender == 'male' %}selected{% endif %}>Male</option>
+      <option value="female" {% if user.profile and user.profile.gender == 'female' %}selected{% endif %}>Female</option>
+      <option value="other" {% if user.profile and user.profile.gender == 'other' %}selected{% endif %}>Other</option>
+    </select>
+
+    <label class="label">Activity Level</label>
+    <select name="activity_level" class="input">
+      <option value="low" {% if user.profile and user.profile.activity_level == 'low' %}selected{% endif %}>Low</option>
+      <option value="moderate" {% if user.profile and user.profile.activity_level == 'moderate' %}selected{% endif %}>Moderate</option>
+      <option value="high" {% if user.profile and user.profile.activity_level == 'high' %}selected{% endif %}>High</option>
+    </select>
+
+    <label class="label">Diet Preference</label>
+    <select name="diet_preference" class="input">
+      <option value="vegetarian" {% if user.profile and user.profile.diet_preference == 'vegetarian' %}selected{% endif %}>Vegetarian</option>
+      <option value="non-vegetarian" {% if user.profile and user.profile.diet_preference == 'non-vegetarian' %}selected{% endif %}>Non-Vegetarian</option>
+      <option value="vegan" {% if user.profile and user.profile.diet_preference == 'vegan' %}selected{% endif %}>Vegan</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Save Profile</button>
+  </form>
+
+  {% if user.profile %}
+    <div class="mt-4">
+      <h3>Saved Profile</h3>
+      <p><strong>Age:</strong> {{ user.profile.age }}</p>
+      <p><strong>Height:</strong> {{ user.profile.height }} cm</p>
+      <p><strong>Weight:</strong> {{ user.profile.weight }} kg</p>
+      <p><strong>Gender:</strong> {{ user.profile.gender }}</p>
+      <p><strong>Activity:</strong> {{ user.profile.activity_level }}</p>
+      <p><strong>Diet:</strong> {{ user.profile.diet_preference }}</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
